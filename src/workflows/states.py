@@ -33,3 +33,4 @@ class RAGState(TypedDict):
     generation: str
     documents: List[str]
     rewrite_count: int
+    intent: str

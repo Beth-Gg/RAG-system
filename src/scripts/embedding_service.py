@@ -32,7 +32,7 @@ class PineconeEmbeddingManager:
         result = self.store_embeddings(embeddings, documents)
         print(result)
     
-    def search_matching(self, query: str, model: str = "llama-text-embed-v2", top_k: int = 5):
+    def search_matching(self, query: str, model: str = "llama-text-embed-v2", top_k: int = 2):
         index = self.pc.Index(name=self.index_name)
         query_embedding = self.pc.inference.embed(
             model=model,
@@ -61,19 +61,42 @@ if __name__ == '__main__':
 
     manager = PineconeEmbeddingManager(api_key=api_key, index_name='kifiya', name_space='test')
     
-    markdown_document = '''
-    ### This is a test section
-    Here is the data.
+    # markdown_document = '''
+    # # Kifiya Company Information
 
-    #### This is a test sub-section
-    Here is the data.
-    '''
+    # Welcome to the Kifiya Company documentation! Below you'll find helpful information about Kifiya.
 
-    headers_to_split_on = [("###", "Header 3"), ("####", "Header 4")]
+    # ## Contact Information
+
+    # You can contact us via email at [contact@kifiya.com](mailto:contact@kifiya.com) or call us at +123-456-7890.
+
+    # ## Frequently Asked Questions
+
+    # ### What services does Kifiya provide?
+    # Kifiya provides a wide range of services, including but not limited to:
+    # - Virtual assistant systems
+    # - AI chatbots
+    # - Data analytics solutions
+
+    # ### How can I track my order?
+    # To track your order, please visit [this page](https://www.kifiya.com/order-status) and enter your order number.
+
+    # ## Company Address
+
+    # Kifiya's headquarters are located at:
+    # - 123 Kifiya Street, Addis Ababa, Ethiopia
+    # ''' 
+
+    with open("prm_faq.md", "r", encoding="utf-8") as f:
+        markdown_document = f.read()
+
+    headers_to_split_on = [("##", "Header 2"), ("###", "Header 3")]
     markdown_splitter = MarkdownHeaderTextSplitter(headers_to_split_on)
     md_header_splits = markdown_splitter.split_text(markdown_document)
+
+    documents = [Document(page_content=str(part)) for part in md_header_splits]
     
-    manager.create_and_store_embeddings(md_header_splits, index_name=pinecone_index, name_space=pinecone_namespace)
+    manager.create_and_store_embeddings(md_header_splits)
     
     result = manager.search_matching("Where can I contact kifiya?")
     for doc in result:
