@@ -28,9 +28,7 @@ class RAGState(TypedDict):
         documents: list of documents
         rewrite_count: the number of rewrites of the query
     """
-
+    # thread_id: str
     prompt: str
     generation: str
     documents: List[str]
-    rewrite_count: int
-    intent: str

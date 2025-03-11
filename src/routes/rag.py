@@ -6,17 +6,6 @@ from workflows.graphs import app as rag_app
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000"
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,  # List of allowed origins (URLs)
-    allow_credentials=True,
-    allow_methods=["*"],  # Allow all HTTP methods (GET, POST, etc.)
-    allow_headers=["*"],  # Allow all headers
-)
 
 rag_router = APIRouter(prefix='/rag', tags=['RAG'])
 
