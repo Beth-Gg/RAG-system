@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi import APIRouter
 from fastapi.middleware.cors import CORSMiddleware
-from dtos.rag import RAGRequest
-from workflows.graphs import app as rag_app
+from src.dtos.rag import RAGRequest
+from src.workflows.graphs import app as rag_app
 
 app = FastAPI()
 

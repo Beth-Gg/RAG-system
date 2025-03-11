@@ -2,7 +2,7 @@ import os
 from dotenv import find_dotenv, load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
-from workflows.prompts import RESPONSE_PROMPT
+from src.workflows.prompts import RESPONSE_PROMPT
 
 
 load_dotenv(find_dotenv())

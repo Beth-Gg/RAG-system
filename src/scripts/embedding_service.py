@@ -20,11 +20,18 @@ class PineconeEmbeddingManager:
         )
     
     def store_embeddings(self, embeddings: EmbeddingsList, documents: List[Document]):
+        if self.index_name not in self.pc.list_indexes().names():
+            pc.create_index(self.index_name, dimension=1024, metric="cosine", spec=ServerlessSpec(cloud="gcp", region="us-east-1"))
+        
         index = self.pc.Index(name=self.index_name)
         records = [
             {"id": f"vector{idx}", "values": e['values'], "metadata": {"text": d.page_content}}
             for idx, (d, e) in enumerate(zip(documents, embeddings))
         ]
+
+        if INDEX_NAME not in pc.list_indexes().names():
+            pc.create_index(INDEX_NAME, dimension=384, metric="cosine", spec=ServerlessSpec(cloud="gcp", region="us-east-1"))
+
         return index.upsert(vectors=records, namespace=self.name_space)
     
     def create_and_store_embeddings(self, documents: List[Document]):

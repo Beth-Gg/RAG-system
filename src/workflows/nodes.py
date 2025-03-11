@@ -1,5 +1,5 @@
-from scripts.embedding_service import PineconeEmbeddingManager
-from workflows.states import RAGState
+from src.scripts.embedding_service import PineconeEmbeddingManager
+from src.workflows.states import RAGState
 from langchain_openai import ChatOpenAI
 
 def retrieve_documents(state: RAGState, retriever: PineconeEmbeddingManager) -> RAGState:

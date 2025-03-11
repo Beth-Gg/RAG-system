@@ -132,4 +132,15 @@ Upon logging in, you will see the main dashboard, which includes different secti
 | Uses Internet | Does participant use the internet? |
 | Uses Social Media | Does participant use social media? |
 
+# dashboard
+- the dashboard provides a comprehensive visualized overview of the data in the prm
+- as you scroll down you find:
+## participant overview
+- contains the gender distribution, health disability status, IDP and refugee status of participants
+## demography and accesibility 
+-contains the number of participants by region, a map plotting the participants by region, woreda, zone
+## employment
+- contains the employment status distribution, trend of employment status over time
+## finance
+- contains average monthly income and expenses of participants, the percentage of participants with a savings account
 

@@ -1,9 +1,9 @@
 import os
 from dotenv import load_dotenv, find_dotenv
-from workflows.nodes import retrieve_documents, generate_final_response
-from workflows.agents import response_generator
-from workflows.states import RAGState
-from scripts.embedding_service import PineconeEmbeddingManager
+from src.workflows.nodes import retrieve_documents, generate_final_response
+from src.workflows.agents import response_generator
+from src.workflows.states import RAGState
+from src.scripts.embedding_service import PineconeEmbeddingManager
 from langgraph.graph import START, END, StateGraph
 
 load_dotenv(find_dotenv())
